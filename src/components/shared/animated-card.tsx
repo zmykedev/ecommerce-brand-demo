@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card} from '@/components/ui/card'
 import { cn } from '@/lib/utils'
 
 interface AnimatedCardProps {

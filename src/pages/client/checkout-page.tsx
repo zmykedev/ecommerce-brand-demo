@@ -75,7 +75,7 @@ export function CheckoutPage() {
 
   const total = getTotal()
 
-  const onSubmit = (data: CheckoutFormData) => {
+  const onSubmit = (_data: CheckoutFormData) => {
     if (currentStep < 3) {
       setCurrentStep(currentStep + 1)
     } else {
@@ -262,7 +262,7 @@ export function CheckoutPage() {
                       <Select
                         value={paymentMethod}
                         onValueChange={(value) =>
-                          setValue('paymentMethod', value as any)
+                          setValue('paymentMethod', value as 'credit_card' | 'paypal' | 'bank_transfer')
                         }
                       >
                         <SelectTrigger>

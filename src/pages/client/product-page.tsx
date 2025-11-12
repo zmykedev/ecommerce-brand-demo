@@ -8,7 +8,6 @@ import { useCart } from '@/hooks/use-cart'
 import { useWishlist } from '@/hooks/use-wishlist'
 import { mockProducts } from '@/utils/mock-data'
 import { formatPrice } from '@/lib/utils'
-import { Skeleton } from '@/components/shared/skeleton'
 
 export function ProductPage() {
   const { id } = useParams<{ id: string }>()
