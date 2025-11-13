@@ -70,7 +70,6 @@ export function AdminPageContent() {
 
   const aboutContent = pageContents.find((pc) => pc.page === 'about')
   const contactContent = pageContents.find((pc) => pc.page === 'contact')
-  const faqContent = pageContents.find((pc) => pc.page === 'faq')
   const termsContent = pageContents.find((pc) => pc.page === 'terms')
   const helpContent = pageContents.find((pc) => pc.page === 'help')
   const shippingContent = pageContents.find((pc) => pc.page === 'shipping')
@@ -249,7 +248,10 @@ export function AdminPageContent() {
         description: 'La pregunta frecuente ha sido actualizada',
       })
     } else {
-      addFAQItem(data)
+      addFAQItem({
+        ...data,
+        active: data.active ?? true,
+      })
       toast({
         title: 'Pregunta agregada',
         description: 'La pregunta frecuente ha sido agregada',
