@@ -13,7 +13,11 @@ function getStoredProducts(): Product[] {
       const parsed = JSON.parse(stored)
       // Si los productos guardados tienen precios antiguos (menores a 1000), resetear con datos nuevos
       const hasOldPrices = parsed.some((p: Product) => p.price < 1000)
-      if (hasOldPrices) {
+      // Si los productos guardados tienen imágenes de picsum, resetear con datos nuevos
+      const hasPicsumImages = parsed.some((p: Product) => 
+        p.image?.includes('picsum') || p.images?.some(img => img.includes('picsum'))
+      )
+      if (hasOldPrices || hasPicsumImages) {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(mockProducts))
         return mockProducts
       }
