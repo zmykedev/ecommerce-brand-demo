@@ -263,13 +263,13 @@ export function AdminProducts() {
                 <div className="space-y-2">
                   <Input
                     id="image"
-                    placeholder="https://picsum.photos/200/200?1"
+                    placeholder="URL de imagen (dejar vacío para usar icono)"
                     {...register('image')}
                     className={errors.image ? 'border-destructive' : ''}
                   />
                   <p className="text-xs text-muted-foreground flex items-center gap-1">
                     <ImageIcon className="h-3 w-3" />
-                    Usa una URL válida de imagen (ej: https://picsum.photos/200/200?1)
+                    Deja vacío para mostrar solo el icono de placeholder
                   </p>
                   {editingProduct && (
                     <div className="mt-2">

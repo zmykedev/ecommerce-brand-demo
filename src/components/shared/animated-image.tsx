@@ -26,6 +26,20 @@ export function AnimatedImage({
   const [isLoading, setIsLoading] = useState(true)
   const [hasError, setHasError] = useState(false)
 
+  // Si src está vacío, mostrar directamente el placeholder
+  if (!src || src.trim() === '') {
+    return (
+      <div className={cn('relative w-full h-full', containerClassName)}>
+        <div className={cn(
+          "absolute inset-0 flex items-center justify-center bg-gradient-to-br from-secondary via-muted to-accent",
+          animated && "animate-pulse-subtle"
+        )}>
+          <ImagePlaceholder size={size} animated={animated} className="w-full h-full" />
+        </div>
+      </div>
+    )
+  }
+
   const handleLoad = () => {
     setIsLoading(false)
     onLoad?.()
