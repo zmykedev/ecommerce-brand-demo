@@ -12,12 +12,18 @@ const ProductPage = lazy(() => import('@/pages/client/product-page').then(m => (
 const CartPage = lazy(() => import('@/pages/client/cart-page').then(m => ({ default: m.CartPage })))
 const CheckoutPage = lazy(() => import('@/pages/client/checkout-page').then(m => ({ default: m.CheckoutPage })))
 const WishlistPage = lazy(() => import('@/pages/client/wishlist-page').then(m => ({ default: m.WishlistPage })))
+const AboutPage = lazy(() => import('@/pages/client/about-page').then(m => ({ default: m.AboutPage })))
+const ContactPage = lazy(() => import('@/pages/client/contact-page').then(m => ({ default: m.ContactPage })))
+const TermsPage = lazy(() => import('@/pages/client/terms-page').then(m => ({ default: m.TermsPage })))
+const SupportPage = lazy(() => import('@/pages/client/support-page').then(m => ({ default: m.SupportPage })))
+const FAQPage = lazy(() => import('@/pages/client/faq-page').then(m => ({ default: m.FAQPage })))
 
 // Lazy load admin pages
 const AdminDashboard = lazy(() => import('@/pages/admin/admin-dashboard').then(m => ({ default: m.AdminDashboard })))
 const AdminProducts = lazy(() => import('@/pages/admin/admin-products').then(m => ({ default: m.AdminProducts })))
 const AdminOrders = lazy(() => import('@/pages/admin/admin-orders').then(m => ({ default: m.AdminOrders })))
 const AdminUsers = lazy(() => import('@/pages/admin/admin-users').then(m => ({ default: m.AdminUsers })))
+const AdminPageContent = lazy(() => import('@/pages/admin/admin-page-content').then(m => ({ default: m.AdminPageContent })))
 
 function LoadingFallback() {
   return (
@@ -46,12 +52,18 @@ function App() {
             <Route path="cart" element={<CartPage />} />
             <Route path="checkout" element={<CheckoutPage />} />
             <Route path="wishlist" element={<WishlistPage />} />
+            <Route path="about" element={<AboutPage />} />
+            <Route path="contact" element={<ContactPage />} />
+            <Route path="terms" element={<TermsPage />} />
+            <Route path="support/:id" element={<SupportPage />} />
+            <Route path="faq" element={<FAQPage />} />
           </Route>
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<AdminDashboard />} />
             <Route path="products" element={<AdminProducts />} />
             <Route path="orders" element={<AdminOrders />} />
             <Route path="users" element={<AdminUsers />} />
+            <Route path="content" element={<AdminPageContent />} />
           </Route>
         </Routes>
       </Suspense>

@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Trash2, ShoppingBag, ArrowLeft, Plus, Minus } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { AnimatedImage } from '@/components/shared/animated-image'
 import { useCart } from '@/hooks/use-cart'
 import { formatPrice } from '@/lib/utils'
 import { EmptyCart } from '@/components/client/empty-cart'
@@ -44,10 +45,11 @@ export function CartPage() {
                     <div className="flex gap-4">
                       <Link to={`/product/${item.product.id}`}>
                         <div className="h-24 w-24 overflow-hidden rounded-lg bg-muted flex-shrink-0">
-                          <img
+                          <AnimatedImage
                             src={item.product.image}
                             alt={item.product.name}
-                            className="h-full w-full object-cover"
+                            containerClassName="h-24 w-24"
+                            size="sm"
                           />
                         </div>
                       </Link>

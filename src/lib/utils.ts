@@ -6,10 +6,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function formatPrice(price: number): string {
-  return new Intl.NumberFormat('es-ES', {
-    style: 'currency',
-    currency: 'EUR',
-  }).format(price)
+  return `$${price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
 }
 
 export function formatDate(date: Date | string): string {

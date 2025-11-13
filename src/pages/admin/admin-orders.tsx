@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
+import { AnimatedImage } from '@/components/shared/animated-image'
 import { mockOrders } from '@/utils/mock-data'
 import { formatPrice, formatDate } from '@/lib/utils'
 
@@ -53,10 +54,12 @@ export function AdminOrders() {
                           className="flex items-center justify-between"
                         >
                           <div className="flex items-center gap-4">
-                            <img
+                            <AnimatedImage
                               src={item.product.image}
                               alt={item.product.name}
-                              className="h-12 w-12 rounded object-cover"
+                              containerClassName="h-12 w-12 rounded"
+                              size="sm"
+                              animated={false}
                             />
                             <div>
                               <p className="font-medium">{item.product.name}</p>

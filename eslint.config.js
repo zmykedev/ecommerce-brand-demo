@@ -29,6 +29,12 @@ export default [
     },
   },
   {
+    files: ['src/hooks/**/*.{ts,tsx}'],
+    rules: {
+      'react-refresh/only-export-components': 'off',
+    },
+  },
+  {
     ignores: ['dist', 'node_modules', 'eslint.config.js'],
   },
 ];

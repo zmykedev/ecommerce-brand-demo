@@ -4,26 +4,40 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 221.2 83.2% 53.3%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Electric Violet Palette - Light Mode */
+    /* Backgrounds: usando electric-violet-50 y 100 en lugar de blanco puro */
+    --background: 276 100% 98%; /* #faf3ff - electric-violet-50 */
+    --foreground: 276 85% 12%; /* Dark text on light violet background */
+    --card: 276 100% 99%; /* Slightly lighter than background */
+    --card-foreground: 276 85% 12%;
+    --popover: 276 100% 99%;
+    --popover-foreground: 276 85% 12%;
+
+    /* Primary: usando electric-violet-600 (#980fff) */
+    --primary: 276 100% 52%; /* #980fff - electric-violet-600 */
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary: usando electric-violet-100 (#f3e3ff) */
+    --secondary: 276 100% 95%; /* #f3e3ff - electric-violet-100 */
+    --secondary-foreground: 276 85% 12%;
+
+    /* Muted: usando electric-violet-200 (#eacdff) */
+    --muted: 276 100% 92%; /* #eacdff - electric-violet-200 */
+    --muted-foreground: 276 30% 35%;
+
+    /* Accent: usando electric-violet-300 (#d9a5ff) */
+    --accent: 276 100% 82%; /* #d9a5ff - electric-violet-300 */
+    --accent-foreground: 276 85% 12%;
+
+    /* Destructive: manteniendo rojo */
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 221.2 83.2% 53.3%;
-    --radius: 0.5rem;
+    --destructive-foreground: 0 0% 98%;
+
+    /* Borders e inputs: usando electric-violet-200 más claro */
+    --border: 276 50% 90%; /* Lighter version of electric-violet-200 */
+    --input: 276 50% 90%;
+    --ring: 276 100% 52%; /* Same as primary */
+    --radius: 0.75rem;
   }
 
   .dark {
@@ -58,3 +72,62 @@
   }
 }
 
+@layer utilities {
+  /* Optimized CSS animations for better performance */
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes pulse-subtle {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.95;
+    }
+  }
+
+  @keyframes icon-glow {
+    0%,
+    100% {
+      opacity: 0.5;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.7;
+      transform: scale(1.05);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.4s ease-out forwards;
+    opacity: 0;
+  }
+
+  .animate-pulse-subtle {
+    animation: pulse-subtle 3s ease-in-out infinite;
+    will-change: opacity;
+  }
+
+  .animate-icon-glow {
+    animation: icon-glow 2s ease-in-out infinite;
+    will-change: opacity, transform;
+  }
+
+  /* Performance optimizations */
+  .animate-fade-in-up,
+  .animate-pulse-subtle,
+  .animate-icon-glow {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+}

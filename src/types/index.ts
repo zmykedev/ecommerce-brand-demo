@@ -66,3 +66,50 @@ export interface WishlistItem {
   createdAt: string
 }
 
+export interface Link {
+  id: string
+  title: string
+  url: string
+  order: number
+  active: boolean
+  createdAt: string
+  updatedAt: string
+}
+
+export interface SupportItem {
+  id: string
+  title: string
+  content: string
+  category: 'help' | 'shipping' | 'faq' | 'other'
+  order: number
+  active: boolean
+  createdAt: string
+  updatedAt: string
+}
+
+export interface FAQItem {
+  id: string
+  question: string
+  answer: string
+  order: number
+  active: boolean
+  createdAt: string
+  updatedAt: string
+}
+
+export interface PageContent {
+  id: string
+  page: 'about' | 'contact' | 'faq' | 'terms' | 'help' | 'shipping'
+  title?: string
+  content: string
+  metadata?: {
+    email?: string
+    phone?: string
+    address?: string
+    city?: string
+    state?: string
+    zipCode?: string
+  }
+  updatedAt: string
+}
+

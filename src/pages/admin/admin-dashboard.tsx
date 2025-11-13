@@ -1,6 +1,6 @@
-import { motion } from 'framer-motion'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Package, ShoppingBag, Users, TrendingUp } from 'lucide-react'
+import { AnimatedImage } from '@/components/shared/animated-image'
 import { mockProducts, mockOrders, mockUsers } from '@/utils/mock-data'
 import { formatPrice } from '@/lib/utils'
 
@@ -40,22 +40,18 @@ const stats = [
 export function AdminDashboard() {
   return (
     <div className="p-8">
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-      >
+      <div className="animate-fade-in-up">
         <h1 className="text-3xl font-bold mb-8">Dashboard</h1>
-      </motion.div>
+      </div>
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-8">
         {stats.map((stat, index) => {
           const Icon = stat.icon
           return (
-            <motion.div
+            <div
               key={stat.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
+              className="animate-fade-in-up"
+              style={{ animationDelay: `${index * 100}ms` }}
             >
               <Card>
                 <CardContent className="p-6">
@@ -74,7 +70,7 @@ export function AdminDashboard() {
                   </div>
                 </CardContent>
               </Card>
-            </motion.div>
+            </div>
           )
         })}
       </div>
@@ -126,10 +122,12 @@ export function AdminDashboard() {
                     key={product.id}
                     className="flex items-center gap-4 border-b pb-4 last:border-0"
                   >
-                    <img
+                    <AnimatedImage
                       src={product.image}
                       alt={product.name}
-                      className="h-12 w-12 rounded object-cover"
+                      containerClassName="h-12 w-12 rounded"
+                      size="sm"
+                      animated={false}
                     />
                     <div className="flex-1">
                       <p className="font-semibold">{product.name}</p>

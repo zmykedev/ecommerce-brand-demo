@@ -1,22 +1,23 @@
 import { useParams, Link } from 'react-router-dom'
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowLeft, ShoppingCart, Heart, Star, Minus, Plus } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
+import { AnimatedImage } from '@/components/shared/animated-image'
 import { useCart } from '@/hooks/use-cart'
 import { useWishlist } from '@/hooks/use-wishlist'
-import { mockProducts } from '@/utils/mock-data'
+import { useProducts } from '@/hooks/use-products'
 import { formatPrice } from '@/lib/utils'
 
 export function ProductPage() {
   const { id } = useParams<{ id: string }>()
+  const { products } = useProducts()
   const { addItem, items, updateQuantity } = useCart()
   const { isInWishlist, toggleItem } = useWishlist()
   const [selectedImage, setSelectedImage] = useState(0)
   const [quantity, setQuantity] = useState(1)
 
-  const product = mockProducts.find((p) => p.id === id)
+  const product = products.find((p) => p.id === id)
 
   if (!product) {
     return (
@@ -55,35 +56,31 @@ export function ProductPage() {
       <div className="grid gap-8 md:grid-cols-2">
         <div>
           <div className="aspect-square w-full overflow-hidden rounded-lg bg-muted mb-4">
-            <AnimatePresence mode="wait">
-              <motion.img
-                key={selectedImage}
-                src={images[selectedImage]}
-                alt={product.name}
-                className="h-full w-full object-cover"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.3 }}
-              />
-            </AnimatePresence>
+            <AnimatedImage
+              key={selectedImage}
+              src={images[selectedImage]}
+              alt={product.name}
+              containerClassName="aspect-square"
+              size="lg"
+            />
           </div>
           {images.length > 1 && (
             <div className="grid grid-cols-4 gap-2">
-              {images.map((image, index) => (
+              {images.map((image: string, index: number) => (
                 <button
                   key={index}
                   onClick={() => setSelectedImage(index)}
-                  className={`aspect-square overflow-hidden rounded-lg border-2 transition-all ${
+                  className={`aspect-square overflow-hidden rounded-lg border-2 transition-all hover:scale-105 active:scale-95 ${
                     selectedImage === index
                       ? 'border-primary'
                       : 'border-transparent'
                   }`}
                 >
-                  <img
+                  <AnimatedImage
                     src={image}
                     alt={`${product.name} ${index + 1}`}
-                    className="h-full w-full object-cover"
+                    containerClassName="aspect-square"
+                    size="sm"
                   />
                 </button>
               ))}
