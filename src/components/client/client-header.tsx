@@ -1,17 +1,33 @@
+import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { ShoppingCart, Heart, Moon, Sun, Menu, Settings, ArrowLeft } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useCart } from '@/hooks/use-cart'
 import { useTheme } from '@/components/shared/theme-provider'
+import { useLinks } from '@/hooks/use-links'
+import { useSupport } from '@/hooks/use-support'
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet'
 
 export function ClientHeader() {
   const { getItemCount } = useCart()
   const { theme, setTheme } = useTheme()
   const location = useLocation()
   const itemCount = getItemCount()
+  const { links } = useLinks()
+  const { supportItems } = useSupport()
+  const [isSheetOpen, setIsSheetOpen] = useState(false)
 
   const showBackButton = ['/about', '/contact', '/terms', '/faq'].includes(location.pathname) || 
                          location.pathname.startsWith('/support/')
+
+  const activeLinks = links.filter(link => link.active).sort((a, b) => a.order - b.order)
+  const activeSupportItems = supportItems.filter(item => item.active).sort((a, b) => a.order - b.order)
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur-md supports-[backdrop-filter]:bg-background/80 shadow-sm">
@@ -74,9 +90,80 @@ export function ClientHeader() {
             </Link>
           </Button>
 
-          <Button variant="ghost" size="icon" className="md:hidden hover:bg-accent">
-            <Menu className="h-5 w-5" />
-          </Button>
+          <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" className="md:hidden hover:bg-accent">
+                <Menu className="h-5 w-5" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-[300px] sm:w-[400px]">
+              <SheetHeader>
+                <SheetTitle className="text-left">Menú</SheetTitle>
+              </SheetHeader>
+              <div className="mt-6 space-y-6">
+                <div>
+                  <h3 className="mb-3 text-sm font-semibold text-muted-foreground uppercase">Enlaces</h3>
+                  <nav className="space-y-2">
+                    {activeLinks.map((link) => (
+                      <Link
+                        key={link.id}
+                        to={link.url}
+                        onClick={() => setIsSheetOpen(false)}
+                        className="block px-3 py-2 rounded-md text-sm font-medium hover:bg-accent transition-colors"
+                      >
+                        {link.title}
+                      </Link>
+                    ))}
+                  </nav>
+                </div>
+                <div>
+                  <h3 className="mb-3 text-sm font-semibold text-muted-foreground uppercase">Soporte</h3>
+                  <nav className="space-y-2">
+                    <Link
+                      to="/faq"
+                      onClick={() => setIsSheetOpen(false)}
+                      className="block px-3 py-2 rounded-md text-sm font-medium hover:bg-accent transition-colors"
+                    >
+                      Preguntas frecuentes
+                    </Link>
+                    {activeSupportItems
+                      .filter((item) => item.category !== 'faq')
+                      .map((item) => (
+                        <Link
+                          key={item.id}
+                          to={`/support/${item.id}`}
+                          onClick={() => setIsSheetOpen(false)}
+                          className="block px-3 py-2 rounded-md text-sm font-medium hover:bg-accent transition-colors"
+                        >
+                          {item.title}
+                        </Link>
+                      ))}
+                  </nav>
+                </div>
+                <div>
+                  <h3 className="mb-3 text-sm font-semibold text-muted-foreground uppercase">Opciones</h3>
+                  <nav className="space-y-2">
+                    <Link
+                      to="/admin"
+                      onClick={() => setIsSheetOpen(false)}
+                      className="flex items-center px-3 py-2 rounded-md text-sm font-medium hover:bg-accent transition-colors"
+                    >
+                      <Settings className="h-4 w-4 mr-2" />
+                      Admin
+                    </Link>
+                    <Link
+                      to="/wishlist"
+                      onClick={() => setIsSheetOpen(false)}
+                      className="flex items-center px-3 py-2 rounded-md text-sm font-medium hover:bg-accent transition-colors"
+                    >
+                      <Heart className="h-4 w-4 mr-2" />
+                      Lista de deseos
+                    </Link>
+                  </nav>
+                </div>
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
     </header>
