@@ -15,13 +15,13 @@ const statusColors = {
 
 export function AdminOrders() {
   return (
-    <div className="p-8">
+    <div className="p-4 sm:p-6 lg:p-8 max-w-full overflow-x-hidden">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
       >
-        <h1 className="text-3xl font-bold mb-2">Gestión de Órdenes</h1>
-        <p className="text-muted-foreground mb-8">
+        <h1 className="text-2xl sm:text-3xl font-bold mb-2">Gestión de Órdenes</h1>
+        <p className="text-sm sm:text-base text-muted-foreground mb-4 sm:mb-6 lg:mb-8">
           Administra y rastrea todas las órdenes
         </p>
       </motion.div>
@@ -36,8 +36,8 @@ export function AdminOrders() {
           >
             <Card>
               <CardHeader>
-                <div className="flex items-center justify-between">
-                  <CardTitle>Orden #{order.id}</CardTitle>
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                  <CardTitle className="text-lg sm:text-xl">Orden #{order.id}</CardTitle>
                   <Badge className={statusColors[order.status]}>
                     {order.status}
                   </Badge>
@@ -51,24 +51,24 @@ export function AdminOrders() {
                       {order.items.map((item) => (
                         <div
                           key={item.product.id}
-                          className="flex items-center justify-between"
+                          className="flex items-center justify-between gap-2 flex-wrap sm:flex-nowrap"
                         >
-                          <div className="flex items-center gap-4">
+                          <div className="flex items-center gap-2 sm:gap-4 flex-1 min-w-0">
                             <AnimatedImage
                               src={item.product.image}
                               alt={item.product.name}
-                              containerClassName="h-12 w-12 rounded"
+                              containerClassName="h-12 w-12 rounded flex-shrink-0"
                               size="sm"
                               animated={false}
                             />
-                            <div>
-                              <p className="font-medium">{item.product.name}</p>
+                            <div className="min-w-0 flex-1">
+                              <p className="font-medium truncate">{item.product.name}</p>
                               <p className="text-sm text-muted-foreground">
                                 Cantidad: {item.quantity}
                               </p>
                             </div>
                           </div>
-                          <span className="font-semibold">
+                          <span className="font-semibold flex-shrink-0">
                             {formatPrice(item.product.price * item.quantity)}
                           </span>
                         </div>

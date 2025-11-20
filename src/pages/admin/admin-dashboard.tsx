@@ -39,12 +39,12 @@ const stats = [
 
 export function AdminDashboard() {
   return (
-    <div className="p-8">
+    <div className="p-4 sm:p-6 lg:p-8 max-w-full overflow-x-hidden">
       <div className="animate-fade-in-up">
-        <h1 className="text-3xl font-bold mb-8">Dashboard</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 lg:mb-8">Dashboard</h1>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-8">
+      <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mb-8">
         {stats.map((stat, index) => {
           const Icon = stat.icon
           return (
@@ -75,7 +75,7 @@ export function AdminDashboard() {
         })}
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="grid gap-4 sm:gap-6 grid-cols-1 lg:grid-cols-2">
         <Card>
           <CardHeader>
             <CardTitle>Órdenes Recientes</CardTitle>
@@ -85,16 +85,16 @@ export function AdminDashboard() {
               {mockOrders.slice(0, 5).map((order) => (
                 <div
                   key={order.id}
-                  className="flex items-center justify-between border-b pb-4 last:border-0"
+                  className="flex items-center justify-between border-b pb-4 last:border-0 gap-2"
                 >
-                  <div>
-                    <p className="font-semibold">Orden #{order.id}</p>
+                  <div className="min-w-0 flex-1">
+                    <p className="font-semibold truncate">Orden #{order.id}</p>
                     <p className="text-sm text-muted-foreground">
                       {formatPrice(order.total)}
                     </p>
                   </div>
                   <span
-                    className={`px-2 py-1 rounded text-xs ${
+                    className={`px-2 py-1 rounded text-xs whitespace-nowrap flex-shrink-0 ${
                       order.status === 'delivered'
                         ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
                         : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
@@ -120,22 +120,22 @@ export function AdminDashboard() {
                 .map((product) => (
                   <div
                     key={product.id}
-                    className="flex items-center gap-4 border-b pb-4 last:border-0"
+                    className="flex items-center gap-3 sm:gap-4 border-b pb-4 last:border-0"
                   >
                     <AnimatedImage
                       src={product.image}
                       alt={product.name}
-                      containerClassName="h-12 w-12 rounded"
+                      containerClassName="h-12 w-12 rounded flex-shrink-0"
                       size="sm"
                       animated={false}
                     />
-                    <div className="flex-1">
-                      <p className="font-semibold">{product.name}</p>
+                    <div className="flex-1 min-w-0">
+                      <p className="font-semibold truncate">{product.name}</p>
                       <p className="text-sm text-muted-foreground">
                         {formatPrice(product.price)}
                       </p>
                     </div>
-                    <span className="text-sm text-muted-foreground">
+                    <span className="text-sm text-muted-foreground whitespace-nowrap flex-shrink-0">
                       Stock: {product.stock}
                     </span>
                   </div>
