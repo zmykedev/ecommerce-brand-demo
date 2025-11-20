@@ -282,16 +282,16 @@ export function AdminPageContent() {
   const activeFAQItems = faqItems.filter((item) => item.active).sort((a, b) => a.order - b.order)
 
   return (
-    <div className="p-8">
-      <div className="mb-6">
-        <h1 className="text-3xl font-bold mb-2">Gestión de Contenido de Páginas</h1>
-        <p className="text-muted-foreground">
+    <div className="p-4 sm:p-6 lg:p-8 max-w-full overflow-x-hidden">
+      <div className="mb-4 sm:mb-6">
+        <h1 className="text-2xl sm:text-3xl font-bold mb-2">Gestión de Contenido de Páginas</h1>
+        <p className="text-sm sm:text-base text-muted-foreground">
           Edita el contenido de las páginas estáticas del sitio
         </p>
       </div>
 
-      <Tabs defaultValue="about" className="space-y-6">
-        <TabsList className="grid grid-cols-3 lg:grid-cols-6 gap-2 w-full">
+      <Tabs defaultValue="about" className="space-y-4 sm:space-y-6">
+        <TabsList className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 w-full overflow-x-auto">
           <TabsTrigger value="about">
             <FileText className="h-4 w-4 mr-2" />
             Sobre Nosotros

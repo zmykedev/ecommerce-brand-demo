@@ -132,7 +132,7 @@ export function AdminProducts() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-secondary/20 p-4 sm:p-6 lg:p-8">
+    <div className="p-4 sm:p-6 lg:p-8 max-w-full overflow-x-hidden">
       <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-2 bg-gradient-to-r from-primary to-[#7b00e0] bg-clip-text text-transparent">

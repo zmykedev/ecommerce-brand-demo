@@ -6,13 +6,13 @@ import { formatDate } from '@/lib/utils'
 
 export function AdminUsers() {
   return (
-    <div className="p-8">
+    <div className="p-4 sm:p-6 lg:p-8 max-w-full overflow-x-hidden">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
       >
-        <h1 className="text-3xl font-bold mb-2">Gestión de Usuarios</h1>
-        <p className="text-muted-foreground mb-8">
+        <h1 className="text-2xl sm:text-3xl font-bold mb-2">Gestión de Usuarios</h1>
+        <p className="text-sm sm:text-base text-muted-foreground mb-4 sm:mb-6 lg:mb-8">
           Administra los usuarios y clientes
         </p>
       </motion.div>
